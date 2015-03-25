@@ -9,6 +9,7 @@
 	<meta name="author" content="RBT">
 
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="bower_components/jquery-steps/demo/css/jquery.steps.css">
 
 	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -18,13 +19,30 @@
 
 	<body>
 		<div class="container">
+			
 			<div class="row">
 				<div class="well">
 					<h1>Wizard Test</h1>
 				</div>
 			</div>
+			
+        	<div id="wizard">
+        		<h1>First Step</h1>
+    			<div>First Content</div>
+ 
+    			<h1>Second Step</h1>
+    			<div>Second Content</div>
+        	</div>
+
 		</div>
+		
+		<script src="bower_components/jquery/dist/jquery.js"></script>
+		<script src="bower_components/jquery-steps/build/jquery.steps.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+		<script>
+        	$("#wizard").steps();
+    	</script>
+
 	</body>
 
 </html>
