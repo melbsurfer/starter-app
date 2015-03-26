@@ -5,11 +5,17 @@
 	<meta charset="utf-8">
 
 	<title>Wizard Test</title>
-	<meta name="Starter App" content="Starter App">
+	<meta name="Wizard Test" content="Wizard Test">
 	<meta name="author" content="RBT">
 
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 	<link rel="stylesheet" href="bower_components/jquery-steps/demo/css/jquery.steps.css">
+	<style>
+		.wizard > .content{
+			background: #F2EFEF;
+			min-height: 15em;
+		}
+	</style>
 
 	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -25,14 +31,88 @@
 					<h1>Wizard Test</h1>
 				</div>
 			</div>
+			<button id="viewModal" class="btn btn-primary">View Modal</button>
 			
-        	<div id="wizard">
-        		<h1>First Step</h1>
-    			<div>First Content</div>
- 
-    			<h1>Second Step</h1>
-    			<div>Second Content</div>
-        	</div>
+			<div class="modal fade" id="exportGeopackageModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+			     Saria-hidden="true">
+			    
+			    <div class="modal-dialog">
+			        
+			        <div class="modal-content">
+
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+			                        aria-hidden="true">&times;</span></button>
+
+			                <h3 class="modal-title fa fa-cube" id="ModalLabel">&nbsp;&nbsp;&nbsp;Export to Geopackage</h3>
+			            </div>
+
+			            <div class="modal-body">
+			                
+				        	<div id="wizard">
+				        		<h3>Details</h3>
+				    			<div>
+					                <form class="form-inline">
+					                    <div class="container">
+					                        <div class="row center-block">
+					                            <div class="col-sm-5 col-md-5 alert alert-info">Geopackage Area Of Interest
+					                            </div>
+					                        </div>
+
+					                        <div class="row">
+					                            <div><p class="label label-default">Inputs</p></div>
+
+					                            <div class="col-sm-5 col-md-5 center-text">
+					                                <p><strong>WKT Polygon:&nbsp;</strong><span class="small" id="aoiPolygon"></span></p>
+					                            </div>
+					                        </div>
+					                    </div>
+					                </form>
+				    			</div>
+				 
+				    			<h3>Submit Job</h3>
+				    			<div>
+									<div class="container">
+					                    <div class="row">
+					                        <div><p class="label label-warning">Outputs</p></div>
+					                        <div class="col-sm-5 col-md-5">
+					                            <p><strong>Bounding Box:</strong><br><span id="aoiBbox"></span></p>
+
+					                            <p><strong>Levels of Detail:</strong>&nbsp;<span id="aoiLod"></span></p>
+								                <button type="button" id="submitAoi" class="btn btn-success">Submit</button>
+								                <button type="button" id="cancelAoi" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					                        </div>
+					                    </div>
+									</div>
+				    			</div>
+
+				    			<h3>Job Info</h3>
+								<div>
+					    			<div class="container">
+					                    <div class="row">
+					                        <div id="aoiJobInfo" class="col-sm-6 col-md-6 alert alert-success">
+					                            <h4>Submitted Job Info</h4>
+
+					                            <p><strong>ID:</strong>&nbsp;<span id="aoiJobId"></span></p>
+
+					                            <p><strong>Layers:</strong>&nbsp;<span id="aoiLayers"></span></p>
+					                        </div>
+					                    </div>
+					    			</div>
+				    			</div>
+				        	</div>
+
+
+			            </div><!-- /.modal-body -->
+
+			          <!--   <div class="modal-footer">
+							<p>RBT</p>
+			            </div> -->
+
+			        </div><!-- /.modal-content -->
+			    </div><!-- /.modal-dialog modal-lg -->
+			</div><!-- /.modal fade "exportGeopackageModal" -->
+
 
 		</div>
 		
@@ -40,7 +120,17 @@
 		<script src="bower_components/jquery-steps/build/jquery.steps.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 		<script>
-        	$("#wizard").steps();
+        	$("#wizard").steps(
+        		{
+    				/* Appearance */
+    				headerTag: "h3",
+    				enableFinishButton: false,
+    				//stepsOrientation: "vertical"
+				}
+        	);
+        	$("#viewModal").on("click", function(){
+        		$('#exportGeopackageModal').modal('show');
+        	});
     	</script>
 
 	</body>
