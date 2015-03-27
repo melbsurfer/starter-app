@@ -10,11 +10,29 @@
 
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 	<link rel="stylesheet" href="bower_components/jquery-steps/demo/css/jquery.steps.css">
+	<link rel="stylesheet" href="bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css">
 	<style>
 		.wizard > .content{
 			background: #F2EFEF;
-			min-height: 15em;
+			min-height: 20em;
 		}
+	
+		#aoiLodSlider {
+			margin-top: 10px;
+		}
+
+		#aoiLodSlider .slider-track-high {
+			background: #ccc;
+		}
+
+		#aoiLodSlider .slider-track-low {
+			background: #ccc;
+		}
+
+		#aoiLodSlider .slider-selection {
+			background: #5cb85c;
+		}
+
 	</style>
 
 	<!--[if lt IE 9]>
@@ -77,8 +95,11 @@
 					                        <div><p class="label label-warning">Outputs</p></div>
 					                        <div class="col-sm-5 col-md-5">
 					                            <p><strong>Bounding Box:</strong><br><span id="aoiBbox"></span></p>
-
-					                            <p><strong>Levels of Detail:</strong>&nbsp;<span id="aoiLod"></span></p>
+					                            <p><strong>Levels of Detail:</strong>&nbsp;<span id="aoiLod"></span>Use the slider to adjust the levels of detail for the output package.</p>
+					                            <br>
+												<b><span id="minLodTxt"></span>&nbsp;&nbsp;&nbsp;</b><input id="aoiLodSlider" value="20" type="text"/><b>&nbsp;&nbsp;&nbsp;<span id="maxLodTxt"></span></b>
+												<br>
+												<br>
 								                <button type="button" id="submitAoi" class="btn btn-success">Submit</button>
 								                <button type="button" id="cancelAoi" class="btn btn-default" data-dismiss="modal">Cancel</button>
 					                        </div>
@@ -119,18 +140,52 @@
 		<script src="bower_components/jquery/dist/jquery.js"></script>
 		<script src="bower_components/jquery-steps/build/jquery.steps.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+		<script src="bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
 		<script>
+        	var mySlider ,minLod, maxLod;
+        	
         	$("#wizard").steps(
         		{
     				/* Appearance */
     				headerTag: "h3",
     				enableFinishButton: false,
-    				//stepsOrientation: "vertical"
 				}
         	);
+        	
         	$("#viewModal").on("click", function(){
-        		$('#exportGeopackageModal').modal('show');
+        		
+        		console.log('click'); 
+        		
+        		// These will come from tile layer table
+        		minLod = 2; 
+        		maxLod = 20;
+
+        		$('#minLodTxt').text(minLod);
+        		$('#maxLodTxt').text(maxLod);
+
+        		mySlider = $('#aoiLodSlider').slider({
+        			 id: "aoiLodSlider",
+        			 min: minLod,
+        			 max: maxLod,
+        			 range: true,
+        			 value: [minLod, maxLod],
+        			 tooltip: 'always'
+				});	
+
+         		$('#exportGeopackageModal').modal('show');
+		
         	});
+
+        	$('#submitAoi').on('click', getLodValues);
+        		
+        	function getLodValues(){
+        		var value = mySlider.slider('getValue');
+    			console.log(
+    				'minLod: '+ value[0] +
+				 ' & maxLod: ' + value[1]
+				);
+        	}
+        		
     	</script>
 
 	</body>
