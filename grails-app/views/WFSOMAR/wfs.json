@@ -1,0 +1,133 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              147.1658,
+              -42.7835
+            ],
+            [
+              147.3529,
+              -42.7827
+            ],
+            [
+              147.353,
+              -42.939
+            ],
+            [
+              147.1666,
+              -42.9408
+            ],
+            [
+              147.1658,
+              -42.7835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": 53,
+        "version": 1,
+        "acquisition_date": "2009-02-05T00:02:01.000+0000",
+        "azimuth_angle": 359.432369580697,
+        "bit_depth": 11,
+        "class_name": "ossimKakaduNitfReader",
+        "country_code": "AS",
+        "data_type": "uint",
+        "entry_id": "0",
+        "file_type": "nitf",
+        "filename": "\/data1\/test\/data\/geoeye1\/GE1_Hobart_GeoStereo_NITF-NCD\/001508507_01000SP00332258\/5V090205M0001912264B220000100072M_001508507\/Volume1\/5V090205M0001912264B220000100072M_001508507.ntf",
+        "grazing_angle": 71.96,
+        "gsd_unit": "meters",
+        "gsdx": 2.00043296048824,
+        "gsdy": 2.00014289382471,
+        "height": 8718,
+        "image_category": "MS",
+        "image_representation": "MULTI",
+        "index_id": "d16021b688f758e954b7a96d15fe04cbe3db59e17c6e24efde3939eed5fcb83e",
+        "ingest_date": "2014-03-25T15:30:12.766+0000",
+        "mission_id": "GEOEYE1",
+        "number_of_bands": 4,
+        "number_of_res_levels": 11,
+        "raster_data_set_id": 53,
+        "security_classification": "U",
+        "sensor_id": "GA",
+        "tie_point_set": "<TiePointSet><Image><coordinates>0,0 7671,0 7671,8717 0,8717<\/coordinates><\/Image><Ground><coordinates>147.165822845586,-42.7835090139717 147.352927792484,-42.7826589063266 147.353043713048,-42.9390423038073 147.166577724221,-42.9407659877087<\/coordinates><\/Ground><\/TiePointSet>",
+        "title": "05FEB09OV05010005V090205M0001912264B220000100072M_001508507",
+        "valid_model": 1,
+        "wac_code": "1556",
+        "width": 7672
+      },
+      "id": "fid--7ab93ae_14c6ffc3b9d_-7c5d"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              147.1658,
+              -42.7835
+            ],
+            [
+              147.353,
+              -42.7826
+            ],
+            [
+              147.3531,
+              -42.939
+            ],
+            [
+              147.1666,
+              -42.9408
+            ],
+            [
+              147.1658,
+              -42.7835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": 54,
+        "version": 1,
+        "acquisition_date": "2009-02-05T00:02:01.000+0000",
+        "azimuth_angle": 359.43421303296,
+        "bit_depth": 11,
+        "class_name": "ossimKakaduNitfReader",
+        "country_code": "AS",
+        "data_type": "uint",
+        "entry_id": "0",
+        "file_type": "nitf",
+        "filename": "\/data1\/test\/data\/geoeye1\/GE1_Hobart_GeoStereo_NITF-NCD\/001508507_01000SP00332258\/5V090205P0001912264B220000100282M_001508507\/Volume1\/5V090205P0001912264B220000100282M_001508507.ntf",
+        "grazing_angle": 71.96,
+        "gsd_unit": "meters",
+        "gsdx": 0.500108042937074,
+        "gsdy": 0.500035722492401,
+        "height": 34868,
+        "image_category": "VIS",
+        "image_representation": "MONO",
+        "index_id": "dbf661396b467333768806d4b8c70e63c980c827898c7c9add8e0618beeb6a55",
+        "ingest_date": "2014-03-25T15:30:53.529+0000",
+        "mission_id": "GEOEYE1",
+        "number_of_bands": 1,
+        "number_of_res_levels": 11,
+        "raster_data_set_id": 54,
+        "security_classification": "U",
+        "sensor_id": "AA",
+        "tie_point_set": "<TiePointSet><Image><coordinates>0,0 30693,0 30693,34867 0,34867<\/coordinates><\/Image><Ground><coordinates>147.165812084775,-42.783501379626 147.352965683685,-42.7826455504956 147.353085277285,-42.9390277071708 147.16656569275,-42.9407526896617<\/coordinates><\/Ground><\/TiePointSet>",
+        "title": "05FEB09OV05010005V090205P0001912264B220000100282M_001508507",
+        "valid_model": 1,
+        "wac_code": "1556",
+        "width": 30694
+      },
+      "id": "fid--7ab93ae_14c6ffc3b9d_-7c5c"
+    }
+  ]
+}

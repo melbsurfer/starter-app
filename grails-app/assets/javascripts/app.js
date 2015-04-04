@@ -3,11 +3,9 @@
  */
 (function($) {
 
-    alert('changes')
-
-    var wfsUrl = "http://omar.ossim.org/omar/wfs?service=wfs&version=1.1.0&request=getFeature&typeName=omar:raster_entry&maxFeatures=10&outputFormat=geojson&filter=file_type='tiff'";
+    //var wfsUrl = "http://omar.ossim.org/omar/wfs?service=wfs&version=1.1.0&request=getFeature&typeName=omar:raster_entry&maxFeatures=10&outputFormat=geojson&filter=file_type='tiff'";
     //var wfsUrl = "http://omar.ossim.org/omar/wfs?service=wfs&version=1.1.0&request=getFeature&typeName=omar:raster_entry&maxFeatures=10&outputFormat=geojson&filter=country='AS'";
-    //var wfsUrl = "js/wfs.json";
+    var wfsUrl = "wfs.json";
 
 
     $.ajax({
