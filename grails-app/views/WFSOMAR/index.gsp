@@ -28,15 +28,17 @@
 
             <!--<div id="omarImageList"></div>-->
 
-            <table id="omarImageList" class="table table-striped table-hover table-condensed table-responsive">
-                <caption>Tile Sets</caption>
-                <tr>
-                    <th>File Name</th>
-                    <th>Ingest Date</th>
-                    <th>Sensor</th>
-                    <th>Mission</th>
-                </tr>
-            </table>
+            %{--<table id="omarImageList" class="table table-striped table-hover table-condensed table-responsive">--}%
+                %{--<caption>Tile Sets</caption>--}%
+                %{--<tr>--}%
+                    %{--<th>File Name</th>--}%
+                    %{--<th>Ingest Date</th>--}%
+                    %{--<th>Sensor</th>--}%
+                    %{--<th>Mission</th>--}%
+                %{--</tr>--}%
+            %{--</table>--}%
+
+            <div id="omarImageList"></div>
 
         </div>
         <asset:javascript src="application.js"/>
