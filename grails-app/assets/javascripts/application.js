@@ -7,6 +7,7 @@
 //
 //= require jquery
 //= require bootstrap.js
+//= require handlebars.js
 //= require app.js
 //= require_self
 
