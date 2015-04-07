@@ -18,6 +18,26 @@
 
     </head>
 
+    %{--Done: Add mustache template for image item in the list--}%
+    <template id="image-template">
+        <div class="row">
+            <div class="col-md-2">
+                <a class="thumbnail" href="http://omar.ossim.org/omar/mapView/imageSpace?layers={{properties.id}}">
+                <img  class="img-rounded" style="width: 128px; height: 85px"
+                      src="http://omar.ossim.org/omar/thumbnail/show/{{properties.id}}" alt="Image thumbnail" size="128"></a>
+            </div>
+            <div class="col-md-2">
+                <small>
+                    Date: acqDate<br>
+                    Sensor:  {{properties.sensor_id}}<br>
+                    Mission:{{properties.mission_id}}<br>
+                    Type: {{properties.file_type}}
+                </small>
+                <hr>
+            </div>
+        </div>
+    </template>
+
     <body>
         <div class="container">
             <div class="row">
@@ -25,7 +45,7 @@
                     <h1>wfsLoop</h1>
                 </div>
             </div>
-
+            <div ><span class="glyphicon glyphicon-star" aria-hidden="true"></span></div>
             <div id="omarImageList"></div>
 
         </div>

@@ -1,10 +1,16 @@
 /**
  * Created by adrake on 4/3/15.
  */
-(function($) {
+$(function() {
 
-    // TODO: Add template for image item in the list
-    var imageTemplate = "";
+    // Done: 4-7-2015 - cache the DOM element so we only have to look at it once
+    var $images = $('#omarImageList');
+
+    var imageTemplate = $('#image-template').html();
+
+    function addImage(image){
+        $images.append(Mustache.render(imageTemplate, image));
+    }
 
     //var wfsUrl = "wfs.json";
     //var wfsUrl = "http://omar.ossim.org/omar/wfs?service=wfs&version=1.1.0&request=getFeature&typeName=omar:raster_entry&maxFeatures=200&outputFormat=geojson&filter=sensor_id='VIIRS'";
@@ -20,9 +26,6 @@
 
     }
 
-    // Done: 4-7-2015 - cache the DOM element so we only have to look at it once
-    var $images = $('#omarImageList');
-
     $.ajax({
         url: wfsUrl,
         dataType: 'jsonp', // Avoid cross domain request issue
@@ -32,30 +35,11 @@
 
             // Done: 4-7-2015 - refactor "obj" --> "image" for code clarity
             $.each(images.features, function (index, image) {
+                console.log('sensor:' + image.properties.file_type);
+                //var acqDate;
+                //acqDate = convertDate(image.properties.acquisition_date);
 
-                var acqDate;
-                acqDate = convertDate(image.properties.acquisition_date);
-
-                $($images).append(
-
-                    '<div class="row">' +
-                        '<div class="col-md-2">' +
-                            '<a href="http://omar.ossim.org/omar/mapView/imageSpace?layers=' + image.properties.id + '" class="thumbnail">' +
-                            '<img  class="img-circle" style="width: 128px; height: 85px" src="http://omar.ossim.org/omar/thumbnail/show/' + image.properties.id + ' " alt="Image thumbnail" size="128"></a> ' +
-                        '</div>' +
-                        '<div class="col-md-2">' +
-                            '<small>' +
-                                'Date: ' + acqDate + '<br>' +
-                                'Sensor: ' + image.properties.sensor_id + '<br>' +
-                                'Mission: ' + image.properties.mission_id + '<br>' +
-                                'Type: ' + image.properties.file_type +
-                            '</small>' +
-                            '<hr>'+
-                        '</div>'
-                  + '</div>'
-
-
-                );
+               addImage(image);
 
             });
 
@@ -65,6 +49,4 @@
         }
     });
 
-
-
-})(window.jQuery);
+});
