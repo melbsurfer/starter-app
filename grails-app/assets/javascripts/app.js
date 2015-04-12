@@ -3,28 +3,62 @@
  */
 $(function() {
 
+    var filterName, filterRangeLow, filterRangeHigh, filterLow, filterHigh, filter;
+
+    // TODO: Set these to DOM elements
+    filterName = 'acquisition_date'; // Dropdown???
+    filterRangeLow = '>=';
+    filterLow = '2003-01-23';  // Datepicker
+    filterRangeHigh = '<=';
+    filterHigh = '2003-02-04'; // Datepicker
+
+    //var wfsUrl = "http://omar.ossim.org/omar/wfs?service=wfs&version=1.1.0&request=getFeature&typeName=omar:raster_entry&maxFeatures=20&outputFormat=geojson&filter=file_type='tiff'";
+    //var wfsUrl = "http://omar.ossim.org/omar/wfs?service=wfs&version=1.1.0&request=getFeature&typeName=omar:raster_entry&maxFeatures=200&outputFormat=geojson&filter=sensor_id='VIIRS'";
+    //var wfsUrl = "http://localhost:9999/omar/wfs?service=wfs&version=1.1.0&request=getFeature&typeName=omar:raster_entry&maxFeatures=50&outputFormat=geojson&filter=" + filterName + filterRangeLow + "'"+ filter + "'";
+    //var wfsUrl = "http://localhost:9999/omar/wfs?service=wfs&version=1.1.0&request=getFeature&typeName=omar:raster_entry&maxFeatures=50&outputFormat=geojson&filter=acquisition_date>='2003-01-23'+and+acquisition_date<='2003-01-24'";
+    var wfsUrl = "http://localhost:9999/omar/wfs?service=wfs&version=1.1.0&request=getFeature&typeName=omar:raster_entry&maxFeatures=50&outputFormat=geojson&filter=" + filterName + filterRangeLow + filterLow + '+and+' + filterName + filterRangeHigh + filterHigh;
+
+
     // Done: 4-7-2015 - cache the DOM element so we only have to look at it once
     var $images = $('#omarImageList');
 
-    var imageTemplate = $('#image-template').html();
+    var imageSource = $('#image-template').html();
+    var imageTemplate = Handlebars.compile(imageSource);
 
-    function addImage(image){
-        $images.append(Mustache.render(imageTemplate, image));
-    }
-
-    //var wfsUrl = "wfs.json";
-    //var wfsUrl = "http://omar.ossim.org/omar/wfs?service=wfs&version=1.1.0&request=getFeature&typeName=omar:raster_entry&maxFeatures=200&outputFormat=geojson&filter=sensor_id='VIIRS'";
-    var wfsUrl = "http://omar.ossim.org/omar/wfs?service=wfs&version=1.1.0&request=getFeature&typeName=omar:raster_entry&maxFeatures=20&outputFormat=geojson&filter=file_type='tiff'";
+    //function addImage(image){
+    //    $images.append(imageTemplate, (image));
+    //}
 
     //Done: 4-6-2015 - Add date converision
-    //Handlebars.registerHelper("formatDate", function convertDate(date){
-    //    var stdDate;
-    //    var date = new Date(date);
-    //    stdDate = date.toLocaleDateString();
-    //
-    //    return stdDate;
-    //
-    //});
+    Handlebars.registerHelper("formatDate", function convertDate(date){
+
+        if(date){
+            var inDate, outDate, options;
+
+            inDate = new Date(date);
+            options = { year: '2-digit', month: 'numeric', day: 'numeric', hour12: 'true', hour: 'numeric', minute: 'numeric', second: 'numeric' }
+            outDate = inDate.toLocaleDateString('en-US', options);
+
+            return outDate;
+        }
+        else{
+            return "Unknown";
+        }
+    });
+
+    Handlebars.registerHelper("formatString", function convertFirstToCaps(s){
+        if(s){
+            // Set to lower case and then capitalize first letter
+            return s.toLowerCase().replace( /\b./g, function(a){ return a.toUpperCase(); } );
+        }
+        else{
+            return "Unknown";
+        }
+    });
+
+    Handlebars.registerHelper("addToOmarMap", function addWmsToOmarMap(wmsId){
+        alert(wmsId);
+    });
 
     $.ajax({
         url: wfsUrl,
@@ -34,17 +68,10 @@ $(function() {
             console.log(images);
 
             //Done: 4-7-2015 - Add image count above the image list
-            console.log(images.features.length);
             $('#imageCount').html(images.features.length);
 
-            // Done: 4-7-2015 - refactor "obj" --> "image" for code clarity
-            $.each(images.features, function (index, image) {
-
-                //var acqDate;
-                //acqDate = convertDate(image.properties.acquisition_date);
-
-               addImage(image);
-
+            $images.append(imageTemplate(images));
+            $('[data-toggle="tooltip"]').tooltip({
             });
 
         },
@@ -52,5 +79,31 @@ $(function() {
             alert('Error fetching images.');
         }
     });
+
+    $('.omar-thumb').on('click', function(){
+        alert('Adding current image to Omar Map');
+    });
+
+    $('a.panel').click(function() {
+        var $target = $($(this).attr('href')),
+            $other = $target.siblings('.active');
+
+        if (!$target.hasClass('active')) {
+            $other.each(function(index, self) {
+                var $this = $(this);
+                $this.removeClass('active').animate({
+                    left: $this.width()
+                }, 100);
+            });
+
+            $target.addClass('active').show().css({
+                left: -($target.width())
+            }).animate({
+                left: 0
+            }, 100);
+        }
+    });
+
+
 
 });
